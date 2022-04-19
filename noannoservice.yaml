@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: forecast2
+  labels:
+    app: forecast2
+    service: forecast2
+spec:
+  ports:
+  - port: 3022
+    name: http
+  selector:
+    app: forecast2

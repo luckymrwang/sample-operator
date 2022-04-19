@@ -1,0 +1,8 @@
+domain: my.domain
+layout: go.kubebuilder.io/v2.0.0
+repo: samp
+resources:
+- group: inspur.incloud
+  kind: Guestbook
+  version: v1
+version: 3-alpha
