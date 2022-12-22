@@ -78,6 +78,6 @@ func (r *DestinationRuleReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	}
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&v1beta1.DestinationRule{}).
-		WithEventFilter(&eventfilters.DestinationRulePredicate{}).
+		WithEventFilter(&eventfilters.NamespacePredicate{}).
 		Complete(r)
 }

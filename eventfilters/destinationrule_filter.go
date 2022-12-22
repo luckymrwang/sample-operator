@@ -9,19 +9,19 @@ type DestinationRulePredicate struct {
 }
 
 func (r *DestinationRulePredicate) Create(e event.CreateEvent) bool {
-	return r.predict(e.Meta, "CREATE")
+	return r.predict(e.Object, "CREATE")
 }
 
 func (r *DestinationRulePredicate) Update(e event.UpdateEvent) bool {
-	return r.predict(e.MetaNew, "UPDATE") || r.predict(e.MetaOld, "UPDATE")
+	return r.predict(e.ObjectNew, "UPDATE") || r.predict(e.ObjectOld, "UPDATE")
 }
 
 func (r *DestinationRulePredicate) Delete(e event.DeleteEvent) bool {
-	return r.predict(e.Meta, "DELETE")
+	return r.predict(e.Object, "DELETE")
 }
 
 func (r *DestinationRulePredicate) Generic(e event.GenericEvent) bool {
-	return r.predict(e.Meta, "GENERIC")
+	return r.predict(e.Object, "GENERIC")
 }
 
 func (r *DestinationRulePredicate) predict(obj metav1.Object, event string) bool {

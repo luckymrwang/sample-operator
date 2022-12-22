@@ -11,19 +11,19 @@ type ServicePredicate struct {
 }
 
 func (r *ServicePredicate) Create(e event.CreateEvent) bool {
-	return r.predict(e.Meta)
+	return r.predict(e.Object)
 }
 
 func (r *ServicePredicate) Update(e event.UpdateEvent) bool {
-	return r.predict(e.MetaNew) || r.predict(e.MetaOld)
+	return r.predict(e.ObjectNew) || r.predict(e.ObjectOld)
 }
 
 func (r *ServicePredicate) Delete(e event.DeleteEvent) bool {
-	return r.predict(e.Meta)
+	return r.predict(e.Object)
 }
 
 func (r *ServicePredicate) Generic(e event.GenericEvent) bool {
-	return r.predict(e.Meta)
+	return r.predict(e.Object)
 }
 
 func (r *ServicePredicate) predict(obj metav1.Object) bool {
