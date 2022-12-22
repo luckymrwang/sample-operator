@@ -41,8 +41,7 @@ type Deployment2Reconciler struct {
 // +kubebuilder:rbac:groups=core,resources=deployments,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=core,resources=deployments/status,verbs=get;update;patch
 
-func (r *Deployment2Reconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
-	ctx := context.Background()
+func (r *Deployment2Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	log := r.Log.WithValues("deployment2", req.NamespacedName)
 	fmt.Println("deployment222222222")
 	deploy := new(appv1.Deployment)

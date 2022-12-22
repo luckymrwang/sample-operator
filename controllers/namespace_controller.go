@@ -19,6 +19,7 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-logr/logr"
 	corev1 "k8s.io/api/core/v1"
@@ -38,10 +39,12 @@ type NamespaceReconciler struct {
 	Recorder record.EventRecorder
 }
 
-func (r *NamespaceReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
-	ctx := context.Background()
+func (r *NamespaceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+	if req.Name != "foo" {
+		return ctrl.Result{}, nil
+	}
 	log := r.Log.WithValues("namespace", req.NamespacedName)
-	fmt.Println("namespace")
+
 	instance := new(corev1.Namespace)
 	if err := r.Get(ctx, client.ObjectKey{Name: req.Name}, instance); err != nil {
 		log.Info("unable to fetch namespace")
@@ -51,6 +54,10 @@ func (r *NamespaceReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
+	fmt.Println("namespace sleep 2s")
+	time.Sleep(2 * time.Second)
+
+	fmt.Println(instance.Annotations)
 	annotations := instance.Annotations
 	switch annotations["event"] {
 	case "CREATE":
