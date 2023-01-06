@@ -18,7 +18,6 @@ package controllers
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/go-logr/logr"
 	appv1 "k8s.io/api/apps/v1"
@@ -43,7 +42,6 @@ type DeploymentReconciler struct {
 
 func (r *DeploymentReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	log := r.Log.WithValues("deployment1", req.NamespacedName)
-	fmt.Println("deployment1111111111")
 	deploy := new(appv1.Deployment)
 	if err := r.Get(ctx, req.NamespacedName, deploy); err != nil {
 		log.Info("unable to fetch Deployment")
