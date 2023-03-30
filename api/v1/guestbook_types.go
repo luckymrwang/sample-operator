@@ -1,5 +1,5 @@
 /*
-
+Copyright 2023.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ limitations under the License.
 package v1
 
 import (
+	v1 "k8s.io/api/apps/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -28,10 +29,9 @@ type GuestbookSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Guestbook. Edit Guestbook_types.go to remove/update
-	Foo   string `json:"foo,omitempty"`
-	Hello string `json:"hello,omitempty"`
-	Test  string `json:"test,omitempty"`
+	// Foo is an example field of Guestbook. Edit guestbook_types.go to remove/update
+	Foo        string        `json:"foo,omitempty"`
+	Deployment v1.Deployment `json:"deployment,omitempty"`
 }
 
 // GuestbookStatus defines the observed state of Guestbook
@@ -40,7 +40,8 @@ type GuestbookStatus struct {
 	// Important: Run "make" to regenerate code after modifying this file
 }
 
-// +kubebuilder:object:root=true
+//+kubebuilder:object:root=true
+//+kubebuilder:subresource:status
 
 // Guestbook is the Schema for the guestbooks API
 type Guestbook struct {
@@ -51,7 +52,7 @@ type Guestbook struct {
 	Status GuestbookStatus `json:"status,omitempty"`
 }
 
-// +kubebuilder:object:root=true
+//+kubebuilder:object:root=true
 
 // GuestbookList contains a list of Guestbook
 type GuestbookList struct {

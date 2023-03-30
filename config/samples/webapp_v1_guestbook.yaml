@@ -1,0 +1,28 @@
+apiVersion: webapp.my.domain/v1
+kind: Guestbook
+metadata:
+  name: guestbook-sample
+spec:
+  foo: bar
+  deployment:
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: sleep
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: sleep
+      template:
+        metadata:
+          labels:
+            app: sleep
+        spec:
+          containers:
+            - command:
+                - /bin/sleep
+                - 3650d
+              image: fasionchan/netbox:0.7
+              imagePullPolicy: IfNotPresent
+              name: sleep

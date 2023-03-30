@@ -18,7 +18,6 @@ package controllers
 
 import (
 	"context"
-	"samp/enqueues"
 
 	"github.com/go-logr/logr"
 	networkingv1beta1 "istio.io/api/networking/v1beta1"
@@ -33,7 +32,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
-	"samp/eventfilters"
+	"my.domain/guestbook/enqueues"
+	"my.domain/guestbook/eventfilters"
 )
 
 // ServiceReconciler reconciles a Service object

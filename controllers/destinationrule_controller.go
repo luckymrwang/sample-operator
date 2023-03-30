@@ -19,7 +19,7 @@ package controllers
 import (
 	"context"
 	"fmt"
-	"samp/eventfilters"
+	"my.domain/guestbook/eventfilters"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 

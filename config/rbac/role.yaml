@@ -1,4 +1,3 @@
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -7,9 +6,9 @@ metadata:
   name: manager-role
 rules:
 - apiGroups:
-  - ""
+  - webapp.my.domain
   resources:
-  - deployments
+  - guestbooks
   verbs:
   - create
   - delete
@@ -19,29 +18,15 @@ rules:
   - update
   - watch
 - apiGroups:
-  - ""
+  - webapp.my.domain
   resources:
-  - deployments/status
+  - guestbooks/finalizers
   verbs:
-  - get
-  - patch
   - update
 - apiGroups:
-  - ""
+  - webapp.my.domain
   resources:
-  - services
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - ""
-  resources:
-  - services/status
+  - guestbooks/status
   verbs:
   - get
   - patch
