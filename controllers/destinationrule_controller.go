@@ -70,7 +70,7 @@ func (r *DestinationRuleReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	if err != nil {
 		if apierrors.IsNotFound(err) {
 			fmt.Println("not found")
-			return err
+			return nil
 		}
 		fmt.Println(err)
 		return err

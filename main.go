@@ -57,7 +57,7 @@ func main() {
 	var metricsAddr string
 	var enableLeaderElection bool
 	flag.StringVar(&metricsAddr, "metrics-addr", ":8080", "The address the metric endpoint binds to.")
-	flag.BoolVar(&enableLeaderElection, "enable-leader-election", true,
+	flag.BoolVar(&enableLeaderElection, "enable-leader-election", false,
 		"Enable leader election for controller manager. "+
 			"Enabling this will ensure there is only one active controller manager.")
 	flag.Parse()
@@ -107,16 +107,16 @@ func main() {
 	//	os.Exit(1)
 	//}
 
-	if err = (&controllers.DestinationRuleReconciler{
-		Config:   mgr.GetConfig(),
-		Client:   mgr.GetClient(),
-		Log:      ctrl.Log.WithName("controllers").WithName("DestinationRule"),
-		Scheme:   mgr.GetScheme(),
-		Recorder: mgr.GetEventRecorderFor("Deployment2"),
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "Deployment2")
-		os.Exit(1)
-	}
+	//if err = (&controllers.DestinationRuleReconciler{
+	//	Config:   mgr.GetConfig(),
+	//	Client:   mgr.GetClient(),
+	//	Log:      ctrl.Log.WithName("controllers").WithName("DestinationRule"),
+	//	Scheme:   mgr.GetScheme(),
+	//	Recorder: mgr.GetEventRecorderFor("Deployment2"),
+	//}).SetupWithManager(mgr); err != nil {
+	//	setupLog.Error(err, "unable to create controller", "controller", "Deployment2")
+	//	os.Exit(1)
+	//}
 	// +kubebuilder:scaffold:builder
 
 	if err = (&controllers.NamespaceReconciler{
